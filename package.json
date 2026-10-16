@@ -1,0 +1,16 @@
+{
+  "name": "salonline",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Bilingual AI salon receptionist with real phone and WhatsApp calling integrations",
+  "engines": {"node": ">=24.0.0"},
+  "scripts": {
+    "start": "node --env-file-if-exists=.env server/index.mjs",
+    "dev": "node --watch --env-file-if-exists=.env server/index.mjs",
+    "test": "node --test test/*.test.mjs",
+    "setup": "node scripts/setup.mjs",
+    "check": "node scripts/check.mjs"
+  },
+  "dependencies": {"luxon": "^3.7.2", "pg": "^8.16.3", "ws": "^8.18.3"}
+}

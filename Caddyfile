@@ -1,0 +1,6 @@
+# Set DOMAIN in the Caddy process environment. Run Caddy on the same host
+# as compose, with DNS already pointing at that host.
+{$DOMAIN} {
+    encode zstd gzip
+    reverse_proxy 127.0.0.1:3000
+}

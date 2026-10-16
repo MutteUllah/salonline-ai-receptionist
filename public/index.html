@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#173e35">
+  <meta name="description" content="SalonLine — a thoughtful voice receptionist and appointment workspace for your salon.">
+  <title>SalonLine — Your front desk, in good hands.</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23173e35'/%3E%3Cpath d='M43 21c-7-6-21-5-21 3 0 11 23 4 23 16 0 10-18 12-26 4' fill='none' stroke='%23f4d5bd' stroke-width='5' stroke-linecap='round'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <div class="app-shell">
+    <aside class="sidebar" id="sidebar" aria-label="Main navigation">
+      <a class="brand" href="#overview" aria-label="SalonLine home"><span class="brand-icon" aria-hidden="true">s<span>·</span></span>SalonLine<span class="brand-period">.</span></a>
+      <button class="business-switch" type="button" id="business-card"><span class="business-avatar" id="business-avatar">S</span><span><strong id="sidebar-business">Your salon</strong><small>Receptionist workspace</small></span><span class="chevron">⌄</span></button>
+      <p class="nav-label">WORKSPACE</p>
+      <nav class="navigation">
+        <a class="nav-item active" href="#overview" data-route="overview"><span data-icon="overview"></span>Overview</a>
+        <a class="nav-item" href="#appointments" data-route="appointments"><span data-icon="calendar"></span>Appointments<span class="nav-count" id="nav-booking-count" hidden></span></a>
+        <a class="nav-item" href="#calls" data-route="calls"><span data-icon="phone"></span>Call activity</a>
+        <a class="nav-item" href="#studio" data-route="studio"><span data-icon="wave"></span>Voice studio<span class="tiny-new">TRY IT</span></a>
+        <a class="nav-item" href="#settings" data-route="settings"><span data-icon="settings"></span>Business settings</a>
+      </nav>
+      <div class="sidebar-bottom">
+        <div class="launch-note"><div class="launch-symbol" data-icon="sparkle"></div><strong>Ready for your first call?</strong><p>Connect your number and give every caller a warm welcome.</p><a href="#launch">Set up your receptionist <span>↗</span></a></div>
+        <a class="nav-item" href="#launch" data-route="launch"><span data-icon="rocket"></span>Go live<span class="status-dot" id="launch-dot"></span></a>
+        <div class="sidebar-user"><span class="user-avatar">SL</span><span><strong>Salon workspace</strong><small id="environment-label">Connecting…</small></span><button class="icon-button" id="auth-button" type="button" title="Workspace access" aria-label="Workspace access"><span data-icon="lock"></span></button></div>
+      </div>
+    </aside>
+    <div class="workspace">
+      <header class="topbar"><div class="breadcrumb"><button id="menu-button" class="icon-button mobile-menu" aria-label="Open navigation" type="button"><span data-icon="menu"></span></button><span class="breadcrumb-parent">Workspace</span><span class="breadcrumb-slash">/</span><strong id="current-section">Overview</strong></div><div class="topbar-right"><span class="connection-badge" id="connection-badge"><i></i>Connecting</span><span class="topbar-divider"></span><a class="help-link" href="#launch"><span data-icon="help"></span><span>Setup guide</span></a><span class="topbar-avatar">SL</span></div></header>
+      <main id="main" tabindex="-1"><div class="initial-loading"><div class="loading-mark"></div><p>Opening your front desk…</p></div></main>
+      <footer class="workspace-footer"><span>Made for the moments that matter.</span><span><i class="footer-dot"></i>SalonLine <span class="footer-year">2026</span></span></footer>
+    </div>
+  </div>
+  <div class="toast-region" id="toasts" aria-live="polite" aria-atomic="false"></div>
+  <dialog id="booking-dialog" class="modal"><div class="modal-header"><div><p class="eyebrow">MAKE ROOM FOR SOMETHING GOOD</p><h2>New appointment</h2></div><button type="button" class="icon-button" data-close-dialog="booking-dialog" aria-label="Close new appointment"><span data-icon="close"></span></button></div><form id="booking-form"><div class="modal-body"><div class="form-grid"><label>Service<select name="serviceId" id="booking-service" required></select></label><label>Stylist<select name="stylistId" id="booking-stylist"><option value="">Any available stylist</option></select></label><label class="span-2">Date<input name="date" id="booking-date" type="date" required></label></div><div class="field-label">Available times <span id="slot-timezone"></span></div><div id="booking-slots" class="slot-grid" aria-live="polite"><p class="muted">Choose a service and date to find a time.</p></div><input name="startAt" id="booking-start" type="hidden" required><div class="form-grid customer-fields"><label>Customer name<input name="customerName" autocomplete="name" required placeholder="e.g. Alex Morgan" maxlength="100"></label><label>Phone number<input name="phone" type="tel" autocomplete="tel" required placeholder="+1 555 123 4567" maxlength="30"></label></div><label class="checkbox-label"><input type="checkbox" name="whatsappConsent"><span>Customer agrees to receive appointment updates on WhatsApp.</span></label><p class="form-hint">Creating this appointment confirms the selected service, date and stylist with the customer.</p><p class="form-error" id="booking-error" role="alert"></p></div><div class="modal-footer"><button type="button" class="button secondary" data-close-dialog="booking-dialog">Cancel</button><button type="submit" class="button primary" id="save-booking">Confirm appointment <span>↗</span></button></div></form></dialog>
+  <dialog id="auth-dialog" class="modal auth-modal"><div class="modal-header"><div><p class="eyebrow">YOUR WORKSPACE</p><h2>Welcome back.</h2></div><button type="button" class="icon-button" data-close-dialog="auth-dialog" aria-label="Close workspace access"><span data-icon="close"></span></button></div><form id="auth-form"><div class="modal-body"><p class="muted">Enter the administrator password configured on your server. Your access session stays in this browser tab.</p><label>Administrator password<input id="admin-token" type="password" autocomplete="current-password" placeholder="Your administrator password" required></label><p class="form-error" id="auth-error" role="alert"></p></div><div class="modal-footer"><button class="button secondary" id="signout-button" type="button">Clear session</button><button class="button primary" type="submit">Open workspace <span>→</span></button></div></form></dialog>
+  <dialog id="detail-dialog" class="modal detail-modal"><div id="detail-content"></div></dialog>
+  <script type="module" src="/app.js"></script>
+</body>
+</html>
